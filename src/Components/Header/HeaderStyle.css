@@ -1,0 +1,53 @@
+/* Styling for the navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  height: 60px;
+  background-color: #033343; /* Dark background */
+  border-bottom: 1px solid #ccc;
+  color: white;
+}
+
+/* Styling for the logo */
+.logo img {
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Styling for the search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Styling for the search input */
+.search-bar input {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  font-size: 14px;
+}
+
+.search-bar input::placeholder {
+  color: #888; /* Placeholder color */
+}
+
+/* Styling for the login button */
+.login-button {
+  padding: 8px 15px;
+  background-color: white; /* Button background color */
+  color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 14px;
+}
+
+.login-button:hover {
+  background-color: #e6e6e6; /* Button hover effect */
+}

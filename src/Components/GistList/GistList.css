@@ -1,0 +1,61 @@
+/* General table styling */
+.gistlist {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders to make it look cleaner */
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.gistlist th,
+.gistlist td {
+  padding: 12px 15px;
+  text-align: left; /* Align text to the left */
+  border: 1px solid #ddd; /* Border around cells */
+}
+
+.gistlist thead {
+  background-color: #efefef; /* Light green background for the header */
+  color: white; /* White text in the header */
+}
+
+.gistlist th {
+  font-weight: bold;
+  color: black;
+}
+
+.gistlist tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternating row colors */
+}
+
+.gistlist tbody tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.gistlist td {
+  word-wrap: break-word; /* Allow long content to break into multiple lines */
+}
+
+.table th,
+.table td {
+  text-transform: uppercase; /* Uppercase the text in table headers */
+  letter-spacing: 1px; /* Add spacing between letters for a clean look */
+}
+
+/* Add some spacing between table and other content */
+.gistlist {
+  margin-top: 30px;
+}
+
+/* Responsive Design for Small Screens */
+@media screen and (max-width: 768px) {
+  .gistlist {
+    font-size: 12px; /* Smaller font size for smaller screens */
+  }
+
+  .gistlist th,
+  .gistlist td {
+    padding: 8px 10px; /* Reduced padding on smaller screens */
+  }
+}
