@@ -8,7 +8,7 @@ const Header = () => {
       <div className="logo">
         <img src={Elogo} alt="Emumba logo" />
       </div>
-      <div className="search bar">
+      <div className="search-bar">
         <input
           type="text"
           className="search-input"

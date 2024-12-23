@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header.js";
 import GistList from "./Components/GistList/GistList.js";
-import DataTable from "./Components/Table/DataTable.js";
 import { getData } from "./api/PublicApi.js";
+import { transformData } from "./Components/Table/DataTable";
 
 function App() {
   const [data, setData] = useState([]);
@@ -13,18 +13,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await getData();
-
-        // Transform data to include 'keyword' field
-        const transformedData = response.map((gist) => {
-          const firstFile = Object.values(gist.files)[0];
-          return {
-            ...gist,
-            user: gist.owner?.login || "Unknown",
-            notebook: firstFile?.filename || "Unknown",
-            keyword: firstFile?.language || "Unknown",
-          };
-        });
-
+        const transformedData = transformData(response); // Use the imported function
         setData(transformedData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,16 +25,10 @@ function App() {
   }, []);
 
   return (
-    <div
-      className="App"
-      style={{ height: "100vh", display: "flex", flexDirection: "column" }}
-    >
+    <div className="App" style={{ height: "100vh" }}>
       <Header /> {/* Render the Header component here */}
-      <div style={{ flexGrow: 1 }}>
-        {error ? <p style={{ color: "red" }}>Error: {error}</p> : null}
-        <GistList />
-        <DataTable data={data} />
-      </div>
+      {error ? <p style={{ color: "red" }}>Error: {error}</p> : null}
+      <GistList data={data} error={error} />
     </div>
   );
 }

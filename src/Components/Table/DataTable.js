@@ -1,14 +1,29 @@
+import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { AiOutlineStar, AiOutlineFork } from "react-icons/ai"; // Import icons
+import { AiOutlineStar, AiOutlineFork } from "react-icons/ai";
 
-const DataTable = ({ data }) => {
+// Transform data function
+export const transformData = (data) => {
+  return data.map((gist) => {
+    const firstFile = Object.values(gist.files || [])[0];
+    return {
+      ...gist,
+      user: gist.owner?.login || "Unknown",
+      notebook: firstFile?.filename || "Unknown",
+      keyword: firstFile?.language || "Unknown",
+      content: firstFile?.content || "No Content Available",
+    };
+  });
+};
+
+const DataTable = ({ data, error }) => {
   const columns = [
     {
       field: "avatar_url",
       headerName: "Avatar",
       width: 150,
       renderCell: (params) => {
-        const avatarUrl = params.row.owner ? params.row.owner.avatar_url : null;
+        const avatarUrl = params.row.owner?.avatar_url;
         return avatarUrl ? (
           <div>
             <img
@@ -21,7 +36,6 @@ const DataTable = ({ data }) => {
                 objectFit: "cover",
               }}
             />
-            <span>{params.row.id}</span>
           </div>
         ) : (
           <span>No Avatar</span>
@@ -29,9 +43,9 @@ const DataTable = ({ data }) => {
       },
     },
 
-    { field: "user", headerName: "Name", width: 300 },
+    { field: "user", headerName: "Name", width: 200 },
     { field: "notebook", headerName: "Notebook Name", width: 250 },
-    { field: "keyword", headerName: "Keyword", width: 200 },
+    { field: "keyword", headerName: "Keyword", width: 150 },
     { field: "updated_at", headerName: "Updated", width: 180 },
     {
       field: "forks",
@@ -53,10 +67,9 @@ const DataTable = ({ data }) => {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      {/* Add height here */}
-      <div className="data-grid-container">
-        <DataGrid rows={data} columns={columns} />
-      </div>
+      {error && <div className="error">{error}</div>}
+      {/* Display error if there's one */}
+      <DataGrid rows={data} columns={columns} />
     </div>
   );
 };

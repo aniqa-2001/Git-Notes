@@ -1,61 +1,65 @@
-/* General table styling */
-.gistlist {
+/* General Styles */
+.gist-container {
+  margin: 20px;
+}
+
+.view-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.view-toggle button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.view-toggle button.active {
+  background-color: #003b44;
+  color: white;
+  border-radius: 5px;
+}
+
+/* List View Styles */
+.gist-table {
   width: 100%;
-  border-collapse: collapse; /* Collapse borders to make it look cleaner */
-  margin: 20px 0;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+  border-collapse: collapse;
 }
 
-.gistlist th,
-.gistlist td {
-  padding: 12px 15px;
-  text-align: left; /* Align text to the left */
-  border: 1px solid #ddd; /* Border around cells */
+.gist-table th,
+.gist-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
-.gistlist thead {
-  background-color: #efefef; /* Light green background for the header */
-  color: white; /* White text in the header */
+.gist-table th {
+  background-color: #f2f2f2;
 }
 
-.gistlist th {
-  font-weight: bold;
-  color: black;
+.table-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.gistlist tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Alternating row colors */
+/* Keyword Button */
+.keyword-button {
+  padding: 5px 10px;
+  background: #003b44;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.gistlist tbody tr:hover {
-  background-color: #f1f1f1; /* Highlight row on hover */
-  cursor: pointer; /* Show pointer cursor on hover */
-}
-
-.gistlist td {
-  word-wrap: break-word; /* Allow long content to break into multiple lines */
-}
-
-.table th,
-.table td {
-  text-transform: uppercase; /* Uppercase the text in table headers */
-  letter-spacing: 1px; /* Add spacing between letters for a clean look */
-}
-
-/* Add some spacing between table and other content */
-.gistlist {
-  margin-top: 30px;
-}
-
-/* Responsive Design for Small Screens */
-@media screen and (max-width: 768px) {
-  .gistlist {
-    font-size: 12px; /* Smaller font size for smaller screens */
-  }
-
-  .gistlist th,
-  .gistlist td {
-    padding: 8px 10px; /* Reduced padding on smaller screens */
-  }
+/* Grid View Styles */
+.gist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }

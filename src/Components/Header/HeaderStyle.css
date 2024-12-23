@@ -18,8 +18,11 @@
 
 /* Styling for the search bar */
 .search-bar {
+  width: 500;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: space-between;
+
   gap: 10px;
 }
 
