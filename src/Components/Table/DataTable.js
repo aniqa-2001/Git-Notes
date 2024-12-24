@@ -48,19 +48,25 @@ const DataTable = ({ data, error }) => {
     { field: "keyword", headerName: "Keyword", width: 150 },
     { field: "updated_at", headerName: "Updated", width: 180 },
     {
-      field: "forks",
-      headerName: "",
+      field: "forksCount",
+      headerName: "Forks",
       width: 100,
-      renderCell: () => (
-        <AiOutlineFork style={{ fontSize: "20px", color: "#333" }} />
+      renderCell: (params) => (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <AiOutlineFork style={{ fontSize: "20px", color: "#333" }} />
+          <span>{params.row.forksCount}</span>
+        </div>
       ),
     },
     {
-      field: "stars",
-      headerName: "",
+      field: "starsCount",
+      headerName: "Stars",
       width: 100,
-      renderCell: () => (
-        <AiOutlineStar style={{ fontSize: "20px", color: "#333" }} />
+      renderCell: (params) => (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <AiOutlineStar style={{ fontSize: "20px", color: "#333" }} />
+          <span>{params.row.starscount}</span>
+        </div>
       ),
     },
   ];

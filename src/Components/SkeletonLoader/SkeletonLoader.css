@@ -1,0 +1,55 @@
+.skeleton-container {
+  padding: 20px;
+  width: 100%;
+}
+
+.skeleton-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-item {
+  height: 50px; /* Matches the height of the placeholders */
+  background-color: #e0e0e0; /* Light grey background for the placeholder */
+  border-radius: 5px; /* Rounded corners for better visuals */
+  /* display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px; */
+}
+
+/* .skeleton-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+.skeleton-details {
+  flex: 1;
+}
+
+.skeleton-line {
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.skeleton-line.short {
+  width: 30%;
+}
+
+.skeleton-line.long {
+  width: 70%;
+} */

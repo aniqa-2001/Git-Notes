@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import GistCard from "../GistCard/GistCard.js"; // Import your GistCard component
 import "./GistList.css"; // Add styles for grid and list views
 import { AiOutlineStar, AiOutlineFork } from "react-icons/ai";
+import { starGist } from "../../api/StarsGist";
+import { forkGist } from "../../api/ForksGist";
 
 const GistList = ({ data }) => {
   const [view, setView] = useState("list"); // 'list' or 'grid'
@@ -10,8 +12,27 @@ const GistList = ({ data }) => {
     setView(viewType);
   };
 
+  const handleStarClick = async (gistId) => {
+    const success = await starGist(gistId);
+    if (success) {
+      alert("Gist starred!");
+    } else {
+      alert("Failed to star the gist.");
+    }
+  };
+
+  const handleForkClick = async (gistId) => {
+    const success = await forkGist(gistId);
+    if (success) {
+      alert("Gist forked!");
+    } else {
+      alert("Failed to fork the gist.");
+    }
+  };
+
   return (
     <div className="gist-container">
+      <h2 className="gist-heading">Public Gists</h2>
       <div className="view-toggle">
         <button
           className={view === "list" ? "active" : ""}
@@ -57,8 +78,17 @@ const GistList = ({ data }) => {
                 </td>
                 <td>{new Date(gist.updated_at).toLocaleString()}</td>
                 <td>
-                  <AiOutlineFork />
-                  <AiOutlineStar />
+                  <AiOutlineFork
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleForkClick(gist.id)}
+                  />
+                  {gist.forksCount}
+
+                  <AiOutlineStar
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleStarClick(gist.id)}
+                  />
+                  {gist.starsCount}
                 </td>
               </tr>
             ))}
@@ -67,7 +97,12 @@ const GistList = ({ data }) => {
       ) : (
         <div className="gist-grid">
           {data.map((gist) => (
-            <GistCard key={gist.id} gist={gist} />
+            <GistCard
+              key={gist.id}
+              gist={gist}
+              onStar={() => handleStarClick(gist.id)}
+              onFork={() => handleForkClick(gist.id)}
+            />
           ))}
         </div>
       )}

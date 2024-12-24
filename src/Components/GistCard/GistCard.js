@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineStar, AiOutlineFork } from "react-icons/ai";
 import "./GistCardStyle.css";
 
-const GistCard = ({ gist }) => {
+const GistCard = ({ gist, onStar, onFork }) => {
   return (
     <div className="gist-card">
       <pre className="gist-json">{gist.content.slice(0, 200)}...</pre>
@@ -20,8 +20,16 @@ const GistCard = ({ gist }) => {
           <p>Created {new Date(gist.created_at).toLocaleString()}</p>
         </div>
         <div className="gist-actions">
-          <AiOutlineFork />
-          <AiOutlineStar />
+          <AiOutlineFork
+            style={{ cursor: "pointer" }}
+            onClick={() => onFork(gist.id)}
+          />
+          {gist.forksCount}
+          <AiOutlineStar
+            style={{ cursor: "pointer" }}
+            onClick={() => onStar(gist.id)}
+          />
+          {gist.starsCount}
         </div>
       </div>
     </div>
