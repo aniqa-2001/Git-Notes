@@ -4,6 +4,7 @@ import "./GistList.css"; // Add styles for grid and list views
 import { AiOutlineStar, AiOutlineFork } from "react-icons/ai";
 import { starGist } from "../../api/StarsGist";
 import { forkGist } from "../../api/ForksGist";
+import { Link } from "react-router-dom"; // Import Link from React Router
 
 const GistList = ({ data }) => {
   const [view, setView] = useState("list"); // 'list' or 'grid'
@@ -68,7 +69,9 @@ const GistList = ({ data }) => {
                     alt="Avatar"
                     className="table-avatar"
                   />
-                  {gist.user}
+                  <Link to={`/gist/${gist.id}`}>
+                    {gist.owner?.login || "No Name"}
+                  </Link>
                 </td>
                 <td>{gist.notebook}</td>
                 <td>
@@ -97,12 +100,13 @@ const GistList = ({ data }) => {
       ) : (
         <div className="gist-grid">
           {data.map((gist) => (
-            <GistCard
-              key={gist.id}
-              gist={gist}
-              onStar={() => handleStarClick(gist.id)}
-              onFork={() => handleForkClick(gist.id)}
-            />
+            <Link to={`/gist/${gist.id}`} key={gist.id}>
+              <GistCard
+                gist={gist}
+                onStar={() => handleStarClick(gist.id)}
+                onFork={() => handleForkClick(gist.id)}
+              />
+            </Link>
           ))}
         </div>
       )}

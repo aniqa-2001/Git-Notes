@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header/Header.js";
 import GistList from "./Components/GistList/GistList.js";
+import SkeletonLoader from "./Components/SkeletonLoader/SkeletonLoader.js";
 import { getData } from "./api/PublicApi.js";
 import { transformData } from "./Components/Table/DataTable";
-import SkeletonLoader from "./Components/SkeletonLoader/SkeletonLoader";
 
 function App() {
   const [data, setData] = useState([]);
@@ -15,7 +15,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await getData();
-        const transformedData = transformData(response); // Use the imported function
+        const transformedData = transformData(response);
         setData(transformedData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,16 +29,25 @@ function App() {
   }, []);
 
   return (
-    <div className="App-container" style={{ height: "100vh" }}>
-      <Header /> {/* Render the Header component here */}
-      {error ? (
-        <p style={{ color: "red" }}>Error: {error}</p>
-      ) : loading ? (
-        <SkeletonLoader /> // Display skeleton loader while loading.
-      ) : (
-        <GistList data={data} error={error} />
-      )}
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              loading ? (
+                <SkeletonLoader />
+              ) : error ? (
+                <div className="error-message">{error}</div>
+              ) : (
+                <GistList data={data} />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
